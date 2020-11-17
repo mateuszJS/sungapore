@@ -7,13 +7,16 @@ import theme from './theme'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import store from 'redux-store'
+import { QueryParamProvider } from 'use-query-params'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
+        <QueryParamProvider>
+          <CssBaseline />
+          <App />
+        </QueryParamProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

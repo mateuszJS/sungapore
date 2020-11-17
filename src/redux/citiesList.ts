@@ -8,7 +8,7 @@ export type City = {
 }
 
 const citiesListSlice = createSlice({
-  name: 'counter',
+  name: 'citiesList',
   initialState: {
     loading: false,
     error: null,
@@ -30,7 +30,5 @@ const citiesListSlice = createSlice({
     },
   },
 })
-
-// export const { loading, success, error } = citiesListSlice.actions
 
 export default citiesListSlice

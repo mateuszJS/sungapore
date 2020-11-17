@@ -10,6 +10,9 @@
       ],
       "redux-store": [
         "./src/redux"
+      ],
+      "hooks": [
+        "./src/hooks"
       ]
     }
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ReactComponent as SingaporeSvg } from '~/maps/singapore_map.svg'
-import useCitiesList from './hooks/useCitiesList'
+import { useCitiesList } from 'hooks'
 import useStyles from './styles'
 
 const minLatitude = 1.166114
@@ -17,7 +17,7 @@ const getStyles = (lat: number, lng: number) => ({
 })
 
 const Map = () => {
-  const { loading, error, data } = useCitiesList('SG')
+  const { loading, error, data } = useCitiesList()
   const classes = useStyles()
 
   return (

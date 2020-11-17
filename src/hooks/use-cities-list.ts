@@ -11,17 +11,19 @@ type GeoDBResponse = {
   }>
 }
 
-const useCitiesList = (countriesIds: string) => {
+const SINGAPORE_COUNTY_ID = 'SG'
+
+const useCitiesList = () => {
   const citiesList = useSelector((state) => state.citiesList)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!citiesList.data.length) {
+    if (!citiesList.data.length && !citiesList.loading) {
       dispatch(citiesListActions.loading())
       const fetchCitiesList = async () => {
         try {
           const { data } = await fetchApi<GeoDBResponse>(
-            `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=${countriesIds}`,
+            `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=${SINGAPORE_COUNTY_ID}`,
             {
               method: 'GET',
               headers: {
@@ -47,7 +49,7 @@ const useCitiesList = (countriesIds: string) => {
       }
       fetchCitiesList()
     }
-  }, [countriesIds])
+  }, [])
 
   return citiesList
 }

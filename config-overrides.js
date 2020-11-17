@@ -13,5 +13,6 @@ module.exports = override(
     ['~']: path.resolve(__dirname, 'src'),
     ['assets']: path.resolve(__dirname, 'assets'),
     ['redux-store']: path.resolve(__dirname, 'src/redux'),
+    ['hooks']: path.resolve(__dirname, 'src/hooks'),
   }),
 )
