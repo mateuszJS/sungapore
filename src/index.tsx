@@ -1,12 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { Provider } from 'react-redux'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import store from '~/redux'
+import { QueryParamProvider } from 'use-query-params'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <QueryParamProvider ReactRouterRoute={Route}>
+            <CssBaseline />
+            <App />
+          </QueryParamProvider>
+        </ThemeProvider>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 )
