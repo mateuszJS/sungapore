@@ -6,22 +6,43 @@ import { useFilterState } from 'hooks'
 
 const API_KEY = '0dd7b5ace3de1d95a6726e32a3651e13'
 
+type Weather = {
+  id: number
+  main: string
+  description: string
+  icon: string
+}
+
 type OpenWeatherRes = {
-  data: unknown
+  data: {
+    current: {
+      sunrise: number
+      sunset: number
+      temp: number
+      pressure: number
+      humidity: number
+      weather: Weather[]
+    }
+    daily: Array<{
+      dt: number
+      sunrise: number
+      sunset: number
+      temp: {
+        min: number
+        max: number
+        weather: Weather[]
+      }
+    }>
+  }
 }
 
 const useForecast = () => {
-  const { isReady, lat, lng, dt } = useFilterState()
-  const citiesList = useSelector((state) => {
-    if (isReady) {
-    }
-    return []
-    // const key = isReady == true ? getWeatherKey(lat, lng, dt) :
-    // state.forecase
-  })
-  console.log(isReady, lat, lng, dt)
+  const { isReady, lat, lng } = useFilterState()
+  const forecast = useSelector((state) => state.forecast)
+  const dispatch = useDispatch()
+  console.log(isReady, lat, lng)
   useEffect(() => {
-    if (!citiesList.data.length) {
+    if (isReady && !forecast.loading && !forecast.data.current) {
       dispatch(citiesListActions.loading())
       const fetchCitiesList = async () => {
         try {
@@ -45,7 +66,7 @@ const useForecast = () => {
       }
       fetchCitiesList()
     }
-  }, [lat, lng, dt])
+  }, [lat, lng])
 
   return {}
 }
