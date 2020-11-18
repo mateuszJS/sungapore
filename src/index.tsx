@@ -6,19 +6,22 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './theme'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import store from 'redux-store'
+import store from '~/redux'
 import { QueryParamProvider } from 'use-query-params'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <QueryParamProvider>
-          <CssBaseline />
-          <App />
-        </QueryParamProvider>
-      </ThemeProvider>
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <QueryParamProvider ReactRouterRoute={Route}>
+            <CssBaseline />
+            <App />
+          </QueryParamProvider>
+        </ThemeProvider>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 )

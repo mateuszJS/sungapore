@@ -1,4 +1,4 @@
-import { useQueryParam, NumberParam } from 'use-query-params'
+import { useQueryParam, NumberParam, StringParam } from 'use-query-params'
 import { useCitiesList } from '.'
 
 export enum ForecastType {
@@ -10,11 +10,12 @@ const useFilterState = () => {
   const citiesList = useCitiesList()
   const defaultLat = citiesList.data[0]?.lat
   const defaultLng = citiesList.data[0]?.lng
-  const [type, setType] = useQueryParam('type', NumberParam)
+  const [type, setType] = useQueryParam('type', StringParam)
   const [lat, setLat] = useQueryParam('lat', NumberParam)
   const [lng, setLng] = useQueryParam('lng', NumberParam)
+
   const data = {
-    type: type || ForecastType.daily,
+    type: (type || ForecastType.daily) as ForecastType,
     lat: lat || defaultLat,
     lng: lng || defaultLng,
   }

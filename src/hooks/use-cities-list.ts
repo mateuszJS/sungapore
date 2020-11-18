@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector, citiesListActions } from 'redux-store'
+import { useDispatch, useSelector, citiesListActions } from '~/redux'
 import { fetchApi } from '~/utils'
 
 type GeoDBResponse = {
@@ -12,14 +12,18 @@ type GeoDBResponse = {
 }
 
 const SINGAPORE_COUNTY_ID = 'SG'
+let loading = false // shared state between hooks
+// to avoid making two requests at the same time
 
 const useCitiesList = () => {
   const citiesList = useSelector((state) => state.citiesList)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!citiesList.data.length && !citiesList.loading) {
+    if (!citiesList.data.length && !loading) {
+      loading = true
       dispatch(citiesListActions.loading())
+
       const fetchCitiesList = async () => {
         try {
           const { data } = await fetchApi<GeoDBResponse>(
@@ -46,6 +50,7 @@ const useCitiesList = () => {
         } catch (err) {
           dispatch(citiesListActions.error(err))
         }
+        loading = false
       }
       fetchCitiesList()
     }

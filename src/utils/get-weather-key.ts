@@ -1,3 +1,3 @@
-const getWeatherKey = (lat: string, lng: string, dt: string) => `${lat}-${lng}-${dt}`
+const getWeatherKey = (lat: number, lng: number) => `${lat}-${lng}`
 
 export default getWeatherKey

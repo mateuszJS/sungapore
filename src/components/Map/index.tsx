@@ -1,7 +1,6 @@
 import React from 'react'
-
 import { ReactComponent as SingaporeSvg } from '~/maps/singapore_map.svg'
-import { useCitiesList } from 'hooks'
+import { useCitiesList, useFilterState } from '~/hooks'
 import useStyles from './styles'
 
 const minLatitude = 1.166114
@@ -18,16 +17,31 @@ const getStyles = (lat: number, lng: number) => ({
 
 const Map = () => {
   const { loading, error, data } = useCitiesList()
+  const { lat, lng, setLat, setLng } = useFilterState()
   const classes = useStyles()
+  const selectedPlace = data.find((city) => city.lat === lat && city.lng === lng)
+  const getOnChangeHandler = (lat: number, lng: number) => () => {
+    setLat(lat)
+    setLng(lng)
+  }
 
   return (
-    <div className={classes.root}>
-      <SingaporeSvg width="100%" />
-      {data.map((city) => (
-        <div key={city.name} className={classes.point} style={getStyles(city.lat, city.lng)} />
-      ))}
-      {loading}
-      {error}
+    <div>
+      {selectedPlace && <h1>{selectedPlace.name}</h1>}
+      {selectedPlace && <h1>{selectedPlace.region}</h1>}
+      <div className={classes.mapWrapper}>
+        <SingaporeSvg width="100%" />
+        {data.map((city) => (
+          <button
+            key={city.name}
+            data-name={city.name}
+            className={classes.point}
+            style={getStyles(city.lat, city.lng)}
+            onClick={getOnChangeHandler(city.lat, city.lng)}
+          />
+        ))}
+        {loading}
+      </div>
     </div>
   )
 }
