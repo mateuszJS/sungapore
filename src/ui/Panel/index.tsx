@@ -4,15 +4,14 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { Typography } from '@material-ui/core'
-import theme from '~/ui/theme'
 
-console.log(theme)
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
     height: '100%',
     padding: 30,
     borderRadius: 30,
+    boxShadow: '0px 5px 20px 0px #050515',
   },
   loader: {
     position: 'absolute',

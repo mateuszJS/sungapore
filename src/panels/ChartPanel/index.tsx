@@ -15,15 +15,6 @@ import theme from '~/ui/theme'
 import useStyles from './styles'
 import { TFunction } from 'i18next'
 
-const SCALE_CHART_WIDTH_TO_HEIGHT = 0.5
-
-// "chart": {
-//   "title": "Temperature forecast for the next days",
-//   "hourly": "Hourly",
-//   "daily": "Daily",
-//   "highTemp": "High temperature",
-//   "lowTemp": "Low temperature"
-
 const convertDailyTemps = (t: TFunction): TooltipFormatter => (value, name) => [
   name === 'maxTemp' ? t('chart.highTemp') : t('chart.lowTemp'),
   intl.toCelsius(value as number),
@@ -75,7 +66,7 @@ const AreaChart = () => {
   const forecast = useForecast()
   const { type, setType } = useFilterState()
   const rootNode = useRef<HTMLDivElement>(null)
-  const [chartWidth, setChartWidth] = useState(0)
+  const [chartSize, setChartSize] = useState({ width: 0, height: 0 })
   const { t } = useTranslation()
   const classes = useStyles()
 
@@ -87,8 +78,11 @@ const AreaChart = () => {
   useLayoutEffect(() => {
     const onResize = () => {
       if (rootNode.current) {
-        const width = Number.parseInt(window.getComputedStyle(rootNode.current).width)
-        setChartWidth(width - 60)
+        const computedStyles = window.getComputedStyle(rootNode.current)
+        setChartSize({
+          width: Number.parseInt(computedStyles.width),
+          height: Number.parseInt(computedStyles.height),
+        })
       }
     }
     window.addEventListener('resize', onResize)
@@ -97,32 +91,38 @@ const AreaChart = () => {
   }, [rootNode.current])
 
   return (
-    <Panel loading={forecast.loading} error={forecast.error} ref={rootNode}>
-      <Typography variant="h2">{t('chart.title')}</Typography>
-      <div className={classes.toggleWrapper}>
-        <Button onClick={() => setType(ForecastType.hourly)} disableRipple>
-          <Box component="span" color={theme.palette.accents.neon5}>
-            {t('chart.hourly')}
-          </Box>
-        </Button>
-        <Switch
-          checked={type == ForecastType.daily}
-          onChange={onChange}
-          leftSideColor={theme.palette.accents.neon5}
-          rightSideColor={theme.palette.accents.neon1}
-        />
-        <Button onClick={() => setType(ForecastType.daily)} disableRipple>
-          <Box component="span" color={theme.palette.accents.neon1}>
-            {t('chart.daily')}
-          </Box>
-        </Button>
+    <Panel loading={forecast.loading} error={forecast.error}>
+      <div className={classes.root}>
+        <Typography variant="h2" color="secondary">
+          {t('chart.title')}
+        </Typography>
+        <div className={classes.toggleWrapper}>
+          <Button onClick={() => setType(ForecastType.hourly)} disableRipple>
+            <Box component="span" color={theme.palette.accents.neon5}>
+              {t('chart.hourly')}
+            </Box>
+          </Button>
+          <Switch
+            checked={type == ForecastType.daily}
+            onChange={onChange}
+            leftSideColor={theme.palette.accents.neon5}
+            rightSideColor={theme.palette.accents.neon1}
+          />
+          <Button onClick={() => setType(ForecastType.daily)} disableRipple>
+            <Box component="span" color={theme.palette.accents.neon1}>
+              {t('chart.daily')}
+            </Box>
+          </Button>
+        </div>
+        <div className={classes.chartWrapper} ref={rootNode}>
+          <Chart
+            width={chartSize.width}
+            height={chartSize.height}
+            yTickFormatter={intl.toCelsius}
+            {...getDataProps(t, type, forecast.data)}
+          />
+        </div>
       </div>
-      <Chart
-        width={chartWidth}
-        height={chartWidth * SCALE_CHART_WIDTH_TO_HEIGHT}
-        yTickFormatter={intl.toCelsius}
-        {...getDataProps(t, type, forecast.data)}
-      />
     </Panel>
   )
 }

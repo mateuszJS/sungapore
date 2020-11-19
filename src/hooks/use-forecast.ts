@@ -24,19 +24,22 @@ const useForecast = () => {
           const { current, daily, hourly } = await fetchApi<Forecast>(
             `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,alerts&appid=${API_KEY}&units=metric`,
           )
-          console.log('changed to false')
+          const currentDayInfo = daily[0]
           loading = false
           dispatch(
             forecastActions.success({
               lat,
               lng,
-              current,
-              daily,
+              current: {
+                ...current,
+                minTemp: currentDayInfo.temp.min,
+                maxTemp: currentDayInfo.temp.max,
+              },
+              daily: daily.slice(1, 8), // API returns next 8 days
               hourly,
             }),
           )
         } catch (err) {
-          console.log('changed to false')
           loading = false
           dispatch(forecastActions.error(err))
         }

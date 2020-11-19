@@ -22,16 +22,16 @@ const theme = createMuiTheme({
     accents,
     text: {
       primary: '#fff',
-      secondary: '#ccc',
+      secondary: '#bbb',
     },
     secondary: {
-      main: '#19857b',
+      main: '#bbb',
     },
     error: {
       main: '#ff0000',
     },
     background: {
-      default: '#111',
+      default: '#202020',
       paper: '#333',
     },
   },

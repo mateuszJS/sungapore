@@ -4,13 +4,19 @@
   },
   "currWeather": {
     "title": "Current Weather",
-    "temp": "Current temperature",
-    "humidity": "Humidity",
-    "sunrise": "Sunrise",
-    "sunset": "Sunset"
+    "temp": "Temperature",
+    "current": "Currently: ",
+    "maxTemp": "Today's max: ",
+    "minTemp": "Today's min: ",
+    "humidity": "Humidity: ",
+    "pressure": "Pressure: ",
+    "sunrise": "Sunrise: ",
+    "sunset": "Sunset: ",
+    "moreInfo": "More information",
+    "advertPlaceholder": "Placeholder for payed advert"
   },
   "chart": {
-    "title": "Temperature forecast for the next days",
+    "title": "Next 7 days temperature forecast",
     "hourly": "Hourly",
     "daily": "Daily",
     "highTemp": "High temperature: ",

@@ -29,7 +29,7 @@ const typographyOptions: TypographyOptions = {
     // color: '#ccc',
     fontWeight: 'normal',
     fontStyle: 'normal',
-    fontSize: '1rem',
+    fontSize: '1.2rem',
     lineHeight: 1.25,
     letterSpacing: 'normal',
   },

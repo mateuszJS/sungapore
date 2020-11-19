@@ -34,10 +34,6 @@ const Switch = withStyles((theme) =>
         transform: 'translateX(16px)',
         color: theme.palette.text.primary,
         '& + $track': {
-          backgroundColor: ({ rightSideColor = theme.palette.accents.neon1 }) => {
-            console.log(rightSideColor)
-            return 'red'
-          },
           background: ({ rightSideColor = theme.palette.accents.neon1 }) => rightSideColor,
           opacity: 1,
           border: 'none',
