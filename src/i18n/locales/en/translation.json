@@ -1,0 +1,26 @@
+{
+  "common": {
+    "genericError": "Oops... something went wrong, please refresh the page."
+  },
+  "currWeather": {
+    "title": "Current Weather",
+    "temp": "Temperature",
+    "current": "Currently: ",
+    "maxTemp": "Today's max: ",
+    "minTemp": "Today's min: ",
+    "humidity": "Humidity: ",
+    "pressure": "Pressure: ",
+    "sunrise": "Sunrise: ",
+    "sunset": "Sunset: ",
+    "moreInfo": "More information",
+    "advertPlaceholder": "Placeholder for paid advert"
+  },
+  "chart": {
+    "title": "Next 7 days temperature forecast",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "highTemp": "High temperature: ",
+    "lowTemp": "Low temperature: ",
+    "temp": "Temperature: "
+  }
+}

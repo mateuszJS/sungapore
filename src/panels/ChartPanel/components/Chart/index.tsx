@@ -1,4 +1,5 @@
 import React from 'react'
+import { fade } from '@material-ui/core/styles/colorManipulator'
 import {
   AreaChart,
   Area,
@@ -11,6 +12,7 @@ import {
   LabelFormatter,
 } from 'recharts'
 import CustomTooltip from './CustomTooltip'
+import theme from '~/ui/theme'
 
 type Data = {
   [key: string]: string | number
@@ -43,11 +45,20 @@ const getCustomizedDot = (color: string) => ({
 }) => (
   <g key={index}>
     <circle cx={cx} cy={cy} r={7} fill={color} opacity={0.25} />
-    <circle cx={cx} cy={cy} r={3} fill="white" strokeWidth={2} stroke={color} />
+    <circle
+      cx={cx}
+      cy={cy}
+      r={3}
+      fill={theme.palette.text.primary}
+      strokeWidth={2}
+      stroke={color}
+    />
   </g>
 )
 
 const noop = () => ''
+
+const chartMargin = { top: 15, right: 0, bottom: 0, left: -5 }
 
 const Chart = ({
   data = [],
@@ -59,13 +70,8 @@ const Chart = ({
   tooltipLabelFormatter = noop,
   tooltipValuesFormatter = noop,
 }: ChartProps) => (
-  <AreaChart width={width} height={height} data={data}>
-    <CartesianGrid
-      vertical={false}
-      horizontal={{
-        stroke: '#DBDBDB',
-      }}
-    />
+  <AreaChart width={width} height={height} data={data} margin={chartMargin}>
+    <CartesianGrid vertical={false} stroke={fade(theme.palette.text.secondary, 0.3)} />
     <XAxis
       dataKey="dt"
       tickLine={false}
@@ -105,9 +111,17 @@ const Chart = ({
     <Tooltip
       labelFormatter={tooltipLabelFormatter}
       formatter={tooltipValuesFormatter}
-      content={CustomTooltip}
+      content={
+        <CustomTooltip
+          active={false}
+          label={0}
+          labelFormatter={noop}
+          formatter={noop}
+          payload={[]}
+        />
+      }
       cursor={{
-        stroke: 'blue',
+        stroke: fade(theme.palette.text.secondary, 0.5),
         strokeWidth: 1,
         strokeDasharray: '3 3',
       }}

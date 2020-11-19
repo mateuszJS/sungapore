@@ -17,6 +17,8 @@ export type Forecast = {
     pressure: number
     humidity: number
     weather: Weather[]
+    maxTemp: number
+    minTemp: number
   }
   [ForecastType.daily]: Array<{
     dt: number

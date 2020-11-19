@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
-import theme from './theme'
+import theme from './ui/theme'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import store from '~/redux'
 import { QueryParamProvider } from 'use-query-params'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import './i18n'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector, citiesListActions } from '~/redux'
 import { fetchApi } from '~/utils'
 
@@ -12,12 +13,14 @@ type GeoDBResponse = {
 }
 
 const SINGAPORE_COUNTY_ID = 'SG'
+
 let loading = false // shared state between hooks
 // to avoid making two requests at the same time
 
 const useCitiesList = () => {
   const citiesList = useSelector((state) => state.citiesList)
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (!citiesList.data.length && !loading) {
@@ -31,12 +34,13 @@ const useCitiesList = () => {
             {
               method: 'GET',
               headers: {
-                'x-rapidapi-key': '6b55033f68msh48062e129c846e7p177948jsncb5b1a5b5b3b',
+                'x-rapidapi-key': process.env.REACT_APP_GEO_DB_API_KEY as string,
                 'x-rapidapi-host': 'wft-geo-db.p.rapidapi.com',
               },
             },
           )
 
+          loading = false
           dispatch(
             citiesListActions.success(
               data.map((city) => ({
@@ -48,15 +52,19 @@ const useCitiesList = () => {
             ),
           )
         } catch (err) {
-          dispatch(citiesListActions.error(err))
+          loading = false
+          dispatch(citiesListActions.error(t('common.genericError')))
         }
-        loading = false
       }
       fetchCitiesList()
     }
   }, [])
 
-  return citiesList
+  return {
+    loading: loading || citiesList.loading,
+    data: citiesList.data,
+    error: citiesList.error,
+  }
 }
 
 export default useCitiesList
