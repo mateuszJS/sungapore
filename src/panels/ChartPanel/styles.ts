@@ -4,14 +4,19 @@ export default makeStyles({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
+    flexGrow: 1,
   },
   toggleWrapper: {
     display: 'flex',
     alignItems: 'center',
     margin: '10px 0',
   },
-  chartWrapper: {
+  chartSizeChecked: {
     flexGrow: 1,
+  },
+  chartWrapper: {
+    width: 0,
+    height: 0,
+    overflow: 'visible',
   },
 })

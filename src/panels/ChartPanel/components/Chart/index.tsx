@@ -58,7 +58,7 @@ const getCustomizedDot = (color: string) => ({
 
 const noop = () => ''
 
-const chartMargin = { top: 10, right: 10, bottom: 10, left: -10 }
+const chartMargin = { top: 15, right: 0, bottom: 0, left: -5 }
 
 const Chart = ({
   data = [],

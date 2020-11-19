@@ -2,7 +2,6 @@ import { TypographyOptions } from '@material-ui/core/styles/createTypography'
 
 const typographyOptions: TypographyOptions = {
   h1: {
-    // color: '#fff',
     fontWeight: 400,
     fontStyle: 'normal',
     fontSize: '2rem',
@@ -10,7 +9,6 @@ const typographyOptions: TypographyOptions = {
     letterSpacing: 'normal',
   },
   h2: {
-    // color: '#fff',
     fontWeight: 400,
     fontStyle: 'normal',
     fontSize: '1.5rem',
@@ -18,7 +16,6 @@ const typographyOptions: TypographyOptions = {
     letterSpacing: 'normal',
   },
   body1: {
-    // color: '#fff',
     fontWeight: 400,
     fontStyle: 'normal',
     fontSize: '1rem',
@@ -26,7 +23,6 @@ const typographyOptions: TypographyOptions = {
     letterSpacing: 'normal',
   },
   body2: {
-    // color: '#ccc',
     fontWeight: 'normal',
     fontStyle: 'normal',
     fontSize: '1.2rem',

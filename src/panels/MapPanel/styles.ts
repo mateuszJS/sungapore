@@ -1,8 +1,30 @@
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
-  mapWrapper: {
+  root: {
     height: '100%',
+  },
+  logo: {
+    height: 27,
+    alignSelf: 'flex-start',
+  },
+  verticalCenter: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+    },
+  },
+  title: {
+    fontSize: '3rem',
+    fontWeight: 300,
+  },
+  subtitle: {
+    margin: '10px 0 40px 2px',
+    fontWeight: 300,
+  },
+  mapWrapper: {
     position: 'relative',
   },
   point: {
@@ -13,7 +35,7 @@ export default makeStyles((theme) => ({
     fontSize: 15,
     padding: 5,
     cursor: 'pointer',
-    color: 'blue',
+    color: theme.palette.accents.neon5,
     '&:before': {
       content: '""',
       display: 'block',
@@ -37,7 +59,7 @@ export default makeStyles((theme) => ({
         padding: 2,
         borderRadius: 4,
         fontSize: 16,
-        backgroundColor: 'white',
+        backgroundColor: theme.palette.background.paper,
         border: '4px solid currentColor',
         transform: 'translateX(calc(-50% - 6px))',
         bottom: 14,
@@ -48,6 +70,6 @@ export default makeStyles((theme) => ({
   },
   activePoint: {
     fontSize: 25,
-    color: 'magenta',
+    color: theme.palette.accents.neon1,
   },
 }))

@@ -8,16 +8,25 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 45%',
+    gridTemplateColumns: 'auto',
+    gridTemplateRows: 'auto repeat(2, minmax(400px, auto))',
     gridTemplateAreas: `
-      "map currWeather"
-      "map chart"
+      "map"
+      "currWeather"
+      "chart"
     `,
     backgroundColor: theme.palette.background.default,
     minHeight: '100vh',
     padding: 50,
     gap: 50,
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'minmax(500px, 1fr) 1fr',
+      gridTemplateRows: '1fr 1fr',
+      gridTemplateAreas: `
+        "map currWeather"
+        "map chart"
+      `,
+    },
   },
   currWeather: {
     gridArea: 'currWeather',

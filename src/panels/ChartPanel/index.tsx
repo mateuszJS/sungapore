@@ -114,13 +114,15 @@ const AreaChart = () => {
             </Box>
           </Button>
         </div>
-        <div className={classes.chartWrapper} ref={rootNode}>
-          <Chart
-            width={chartSize.width}
-            height={chartSize.height}
-            yTickFormatter={intl.toCelsius}
-            {...getDataProps(t, type, forecast.data)}
-          />
+        <div className={classes.chartSizeChecked} ref={rootNode}>
+          <div className={classes.chartWrapper}>
+            <Chart
+              width={chartSize.width}
+              height={chartSize.height}
+              yTickFormatter={intl.toCelsius}
+              {...getDataProps(t, type, forecast.data)}
+            />
+          </div>
         </div>
       </div>
     </Panel>

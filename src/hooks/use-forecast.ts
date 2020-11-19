@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector, forecastActions } from '~/redux'
 import { Forecast } from '~/redux/forecast'
 import { fetchApi, getWeatherKey } from '~/utils'
 import { useFilterState } from '~/hooks'
-
-const API_KEY = '0dd7b5ace3de1d95a6726e32a3651e13'
 
 let loading = false // shared state between hooks
 // to avoid making two requests at the same time
@@ -13,6 +12,7 @@ const useForecast = () => {
   const { isReady, lat, lng } = useFilterState()
   const forecast = useSelector((state) => state.forecast)
   const dispatch = useDispatch()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (isReady && !loading && !forecast.data[getWeatherKey(lat, lng)]) {
@@ -22,7 +22,7 @@ const useForecast = () => {
       const fetchCitiesList = async () => {
         try {
           const { current, daily, hourly } = await fetchApi<Forecast>(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,alerts&appid=${API_KEY}&units=metric`,
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,alerts&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}&units=metric`,
           )
           const currentDayInfo = daily[0]
           loading = false
@@ -41,7 +41,7 @@ const useForecast = () => {
           )
         } catch (err) {
           loading = false
-          dispatch(forecastActions.error(err))
+          dispatch(forecastActions.error(t('common.genericError')))
         }
       }
       fetchCitiesList()

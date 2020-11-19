@@ -1,6 +1,6 @@
 {
   "common": {
-    "genericError": "Oops... something went wrong, please try again."
+    "genericError": "Oops... something went wrong, please refresh the page."
   },
   "currWeather": {
     "title": "Current Weather",
@@ -13,7 +13,7 @@
     "sunrise": "Sunrise: ",
     "sunset": "Sunset: ",
     "moreInfo": "More information",
-    "advertPlaceholder": "Placeholder for payed advert"
+    "advertPlaceholder": "Placeholder for paid advert"
   },
   "chart": {
     "title": "Next 7 days temperature forecast",
