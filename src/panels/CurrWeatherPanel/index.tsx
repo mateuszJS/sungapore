@@ -103,10 +103,12 @@ const CurrWeatherPanel = () => {
           </ul>
         </div>
       </div>
-      <Button onClick={onChange} disableRipple>
-        {t('currWeather.moreInfo')}
-      </Button>
-      <Switch checked={isShownMore} onChange={onChange} />
+      <div>
+        <Button onClick={onChange} disableRipple>
+          {t('currWeather.moreInfo')}
+        </Button>
+        <Switch checked={isShownMore} onChange={onChange} />
+      </div>
       {isShownMore ? (
         <ul className={`${classes.listWrapper} ${classes.twoColumns}`}>
           {showMoreData.map((entry) => (
