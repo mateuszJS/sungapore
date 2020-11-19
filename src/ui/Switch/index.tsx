@@ -11,10 +11,17 @@ interface Styles extends Partial<Record<SwitchClassKey, string>> {
 
 interface Props extends SwitchProps {
   classes: Styles
+  rightSideColor?: string
+  leftSideColor?: string
+}
+
+type StylesProps = {
+  rightSideColor?: Props['rightSideColor']
+  leftSideColor?: Props['leftSideColor']
 }
 
 const Switch = withStyles((theme) =>
-  createStyles({
+  createStyles<string, StylesProps>({
     root: {
       width: 42,
       height: 26,
@@ -25,31 +32,41 @@ const Switch = withStyles((theme) =>
       padding: 1,
       '&$checked': {
         transform: 'translateX(16px)',
-        color: theme.palette.common.white,
+        color: theme.palette.text.primary,
         '& + $track': {
-          backgroundColor: '#52d869',
+          backgroundColor: ({ rightSideColor = theme.palette.accents.neon1 }) => {
+            console.log(rightSideColor)
+            return 'red'
+          },
+          background: ({ rightSideColor = theme.palette.accents.neon1 }) => rightSideColor,
           opacity: 1,
           border: 'none',
         },
       },
       '&$focusVisible $thumb': {
-        color: '#52d869',
-        border: '6px solid #fff',
+        color: ({ rightSideColor = theme.palette.accents.neon1 }) => rightSideColor,
+        border: ({ rightSideColor = theme.palette.accents.neon1 }) => `6px solid ${rightSideColor}`,
       },
     },
     thumb: {
-      width: 24,
-      height: 24,
+      margin: 2,
+      width: 20,
+      height: 20,
     },
     track: {
       borderRadius: 26 / 2,
-      border: `1px solid ${theme.palette.grey[400]}`,
-      backgroundColor: theme.palette.grey[50],
+      border: `2px solid transparent`,
+      backgroundColor: ({ leftSideColor = theme.palette.text.secondary }) => leftSideColor,
       opacity: 1,
       transition: theme.transitions.create(['background-color', 'border']),
     },
-    checked: {},
+    checked: {
+      '&$colorSecondary': {
+        color: ({ rightSideColor = theme.palette.accents.neon1 }) => rightSideColor,
+      },
+    },
     focusVisible: {},
+    colorSecondary: {},
   }),
 )(({ classes, ...props }: Props) => {
   return (
@@ -62,6 +79,7 @@ const Switch = withStyles((theme) =>
         thumb: classes.thumb,
         track: classes.track,
         checked: classes.checked,
+        colorSecondary: classes.colorSecondary,
       }}
       {...props}
     />

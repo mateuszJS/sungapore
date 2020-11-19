@@ -35,7 +35,11 @@ const Map = () => {
           <button
             key={city.name}
             data-name={city.name}
-            className={classes.point}
+            className={
+              selectedPlace && selectedPlace.name === city.name
+                ? `${classes.point} ${classes.activePoint}`
+                : classes.point
+            }
             style={getStyles(city.lat, city.lng)}
             onClick={getOnChangeHandler(city.lat, city.lng)}
           />

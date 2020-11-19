@@ -24,7 +24,8 @@ const useForecast = () => {
           const { current, daily, hourly } = await fetchApi<Forecast>(
             `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,alerts&appid=${API_KEY}&units=metric`,
           )
-
+          console.log('changed to false')
+          loading = false
           dispatch(
             forecastActions.success({
               lat,
@@ -35,17 +36,19 @@ const useForecast = () => {
             }),
           )
         } catch (err) {
+          console.log('changed to false')
+          loading = false
           dispatch(forecastActions.error(err))
         }
-        loading = false
       }
       fetchCitiesList()
     }
   }, [lat, lng])
 
   const data = forecast.data[getWeatherKey(lat, lng)]
+
   return {
-    loading: forecast.loading && !data,
+    loading: loading || forecast.loading,
     data,
     error: data ? null : forecast.error,
   }

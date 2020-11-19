@@ -37,6 +37,7 @@ const useCitiesList = () => {
             },
           )
 
+          loading = false
           dispatch(
             citiesListActions.success(
               data.map((city) => ({
@@ -48,15 +49,19 @@ const useCitiesList = () => {
             ),
           )
         } catch (err) {
+          loading = false
           dispatch(citiesListActions.error(err))
         }
-        loading = false
       }
       fetchCitiesList()
     }
   }, [])
 
-  return citiesList
+  return {
+    loading: loading || citiesList.loading,
+    data: citiesList.data,
+    error: citiesList.error,
+  }
 }
 
 export default useCitiesList

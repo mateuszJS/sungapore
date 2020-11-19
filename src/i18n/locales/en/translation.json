@@ -1,0 +1,20 @@
+{
+  "common": {
+    "genericError": "Oops... something went wrong, please try again."
+  },
+  "currWeather": {
+    "title": "Current Weather",
+    "temp": "Current temperature",
+    "humidity": "Humidity",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset"
+  },
+  "chart": {
+    "title": "Temperature forecast for the next days",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "highTemp": "High temperature: ",
+    "lowTemp": "Low temperature: ",
+    "temp": "Temperature: "
+  }
+}
